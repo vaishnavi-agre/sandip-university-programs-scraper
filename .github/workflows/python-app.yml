@@ -1,0 +1,28 @@
+name: Run Python Scraper
+
+on:
+  push:
+    branches:
+      - main  # Change if your default branch is not 'main'
+  workflow_dispatch:  # Allows manual run from GitHub UI
+
+jobs:
+  run-scraper:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests beautifulsoup4 pandas
+
+      - name: Run scraper
+        run: python Task1.py
+
